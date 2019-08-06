@@ -1,4 +1,4 @@
-const config = require('config');
+const config = require('src/startup/config');
 const _ = require('lodash');
 const express = require('express');
 const router = express.Router();
