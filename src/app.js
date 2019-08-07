@@ -1,5 +1,6 @@
+process.env.NODE_CONFIG_DIR = '../config';
 import 'express-async-errors';
-import * as express from 'express';
+import express from 'express';
 const app = express();
 require('./startup/routes')(app);
 require('./startup/db')();

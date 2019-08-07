@@ -9,6 +9,7 @@ Icon
 .env
 server.js
 server.js.map
+dist
 
 # Thumbnails
 ._*
