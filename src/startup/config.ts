@@ -1,6 +1,6 @@
 import config from 'config';
 
-export default (): any => {
+export default (): void => {
     if (!config.get('JWT_PRIVATE_KEY')) {
         throw new Error('FATAL ERROR: JWT_PRIVATE_KEY is not defined!');
     }

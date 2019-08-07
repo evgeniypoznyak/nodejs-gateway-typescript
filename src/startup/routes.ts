@@ -5,9 +5,9 @@ import users from '../routes/users';
 import skills from '../routes/skills';
 import error from '../middleware/error';
 
-export default (app: any): any => {
+export default (app: any): void => {
     app.use(express.json());
-    app.use((req: Request, res: Response, next: NextFunction) => {
+    app.use((req: Request, res: Response, next: NextFunction): void => {
         res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         next();

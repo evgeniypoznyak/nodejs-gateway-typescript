@@ -1,6 +1,6 @@
 import Joi from 'joi';
 
-export default (): any => {
+export default (): void => {
     // @ts-ignore
     Joi.objectId = require('joi-objectid')(Joi);
 };
