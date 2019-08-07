@@ -8,7 +8,10 @@
   "main": "server.js",
   "scripts": {
     "build-ts": "rm -rf dist & tsc",
+    "watch-ts-and-run": "tsc -w & WATCH_MODE=true nodemon dist/app.js",
+    "ts-node": "WATCH_MODE=true ts-node ./src/app.js",
     "start-webpack": "webpack",
+    "start-node-dist": "node ./dist/server.js",
     "start-node": "node server.js",
     "start": "webpack & node server.js"
   },

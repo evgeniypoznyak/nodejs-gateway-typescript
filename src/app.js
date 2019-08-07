@@ -1,11 +1,15 @@
-process.env.NODE_CONFIG_DIR = '../config';
+const {WATCH_MODE} = process.env;
+if (!WATCH_MODE) process.env.NODE_CONFIG_DIR = '../config';
 import 'express-async-errors';
 import express from 'express';
-const app = express();
-require('./startup/routes')(app);
-require('./startup/db')();
-require('./startup/config')();
+import routes from './startup/routes';
+import db from './startup/db';
+import config from './startup/config'
 
+const app = express();
+routes(app);
+db();
+config();
 process.on('unhandledRejection', (ex) => {
     throw ex;
 });
