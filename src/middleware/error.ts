@@ -1,7 +1,7 @@
 import {Request, Response} from 'express';
 
 // must be after all routes and middleware(s)
-export default function (err: Error, req: Request, res: Response) {
+export default (err: Error, req: Request, res: Response): any => {
     console.log({
         level: 'error',
         message: err.message,
