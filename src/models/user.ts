@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, {Schema, SchemaDefinition, SchemaType, SchemaTypeOpts} from 'mongoose';
 import Joi, {} from 'joi';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
@@ -6,42 +6,62 @@ import config from 'config';
 
 const secret: string = process.env.JWT_PRIVATE_KEY || config.get('JWT_PRIVATE_KEY');
 
-const userSchema = new mongoose.Schema({
-    name: {
+interface Name {
+    type: StringConstructor;
+    minlength: number;
+    maxlength: number;
+    required: boolean;
+}
+
+interface Email {
+    type: StringConstructor;
+    required: boolean;
+    minlength: number;
+    maxlength: number;
+    unique: boolean;
+}
+
+class UserSchema implements SchemaDefinition {
+    public name: Name = {
         type: String,
         minlength: 5,
         maxlength: 50,
         required: true,
-    },
-    email: {
+    };
+    public email: Email = {
         type: String,
         required: true,
         minlength: 5,
         maxlength: 255,
         unique: true,
-    },
-    password: {
+    };
+    public password = {
         type: String,
         required: true,
         minlength: 5,
         maxlength: 1024,
         unique: true,
-    },
-    isAdmin: Boolean,
-});
-userSchema.methods.generateAuthToken = function () {
+    };
+    public isAdmin: BooleanConstructor = Boolean;
+
+    [path: string]: SchemaTypeOpts<any> | Schema | SchemaType;
+}
+
+
+const userSchema = new mongoose.Schema(new UserSchema());
+userSchema.methods.generateAuthToken = function (): string {
     return jwt.sign(
         {
             id: this._id,
             isAdmin: this.isAdmin,
-        }, // payload. Could be anything what we need store and pass via token
+        },
         secret
     );
 };
 
-const User = mongoose.model('Users', userSchema);
+const User: any = mongoose.model('Users', userSchema);
 
-const validateUser = (user: object) => {
+const validateUser = (user: UserSchema): object => {
     const schema = {
         name: Joi.string().min(5).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),
