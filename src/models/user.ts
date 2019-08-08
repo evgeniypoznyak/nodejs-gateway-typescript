@@ -1,52 +1,11 @@
-import mongoose, {Schema, SchemaDefinition, SchemaType, SchemaTypeOpts} from 'mongoose';
+import mongoose from 'mongoose';
 import Joi, {} from 'joi';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from 'config';
+import {UserSchema} from './UserSchema';
 
 const secret: string = process.env.JWT_PRIVATE_KEY || config.get('JWT_PRIVATE_KEY');
-
-interface Name {
-    type: StringConstructor;
-    minlength: number;
-    maxlength: number;
-    required: boolean;
-}
-
-interface Email {
-    type: StringConstructor;
-    required: boolean;
-    minlength: number;
-    maxlength: number;
-    unique: boolean;
-}
-
-class UserSchema implements SchemaDefinition {
-    public name: Name = {
-        type: String,
-        minlength: 5,
-        maxlength: 50,
-        required: true,
-    };
-    public email: Email = {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 255,
-        unique: true,
-    };
-    public password = {
-        type: String,
-        required: true,
-        minlength: 5,
-        maxlength: 1024,
-        unique: true,
-    };
-    public isAdmin: BooleanConstructor = Boolean;
-
-    [path: string]: SchemaTypeOpts<any> | Schema | SchemaType;
-}
-
 
 const userSchema = new mongoose.Schema(new UserSchema());
 userSchema.methods.generateAuthToken = function (): string {

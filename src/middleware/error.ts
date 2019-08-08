@@ -8,4 +8,4 @@ export default (err: Error, req: Request, res: Response): any => {
         meta: err,
     });
     return res.status(500).send('Something failed');
-}
+};

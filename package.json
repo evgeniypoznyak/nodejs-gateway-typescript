@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-gateway",
+  "name": "nodejs-gateway-typescript",
   "author": "Evgeniy Poznyak",
   "license": "MIT",
   "description": "NodeJS API Gateway. Handling JWT and Microservices.",
@@ -10,7 +10,9 @@
     "build-ts": "rm -rf dist & tsc",
     "start-node-build": "node ./dist/app.js",
     "watch-ts-and-run": "tsc -w & nodemon ./dist/app.js",
-    "ts-node": "ts-node ./src/app.ts"
+    "ts-node": "ts-node ./src/app.ts",
+    "test": "jest",
+    "test-watch": "jest --watch"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -25,7 +27,9 @@
     "lodash": "^4.17.15",
     "mongoose": "^5.4.12",
     "winston": "^3.2.1",
-    "winston-mongodb": "^4.0.3"
+    "winston-mongodb": "^4.0.3",
+    "jest-config": "^24.8.0",
+    "ts-jest": "^24.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.5.5",
@@ -39,6 +43,7 @@
     "@types/bcrypt": "^3.0.0",
     "@types/config": "0.0.34",
     "@types/express": "^4.16.1",
+    "@types/jest": "^24.0.17",
     "@types/joi": "^14.3.1",
     "@types/jsonwebtoken": "^8.3.0",
     "@types/lodash": "^4.14.121",
@@ -53,6 +58,7 @@
     "babel-register": "^6.26.0",
     "eslint": "^6.1.0",
     "eslint-config-google": "^0.13.0",
+    "jest-cli": "^24.8.0",
     "ts-node": "^8.3.0",
     "typescript": "^3.5.3"
   }
