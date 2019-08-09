@@ -1,0 +1,19 @@
+swagger: "2.0"
+info:
+  title: Node JS API Gateway Service
+  description: API description in Markdown.
+  version: 1.0.0
+host: api.example.com
+schemes:
+  - https
+  - http
+paths:
+  /users:
+    get:
+      summary: Returns a list of users.
+      description: Optional extended description in Markdown.
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
