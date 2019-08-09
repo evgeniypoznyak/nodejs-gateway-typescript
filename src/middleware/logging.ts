@@ -1,7 +1,6 @@
 import winston from 'winston';
-import config from 'config';
 require('winston-mongodb');
-const url = process.env.MONGO_LOGGING || config.get('MONGO_LOGGING');
+const url: string | undefined = process.env.MONGO_LOGGING;
 
 export default winston.createLogger({
     format: winston.format.combine(

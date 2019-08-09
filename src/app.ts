@@ -2,12 +2,12 @@ import 'express-async-errors';
 import express, {Express} from 'express';
 import routes from './startup/routes';
 import db from './startup/db';
-import config from './startup/config';
+import validateEnvironmentVariables from './startup/validateEnvironmentVariables';
 
+validateEnvironmentVariables();
 const app: Express = express();
 routes(app);
 db();
-config();
 process.on('unhandledRejection', ex => {
     throw ex;
 });

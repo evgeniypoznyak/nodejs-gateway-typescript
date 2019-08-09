@@ -2,12 +2,12 @@ import mongoose from 'mongoose';
 import Joi, {} from 'joi';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import config from 'config';
 import {UserSchema} from './UserSchema';
+import 'dotenv/config';
 
-const secret: string = process.env.JWT_PRIVATE_KEY || config.get('JWT_PRIVATE_KEY');
-
+const secret: string = process.env.JWT_SECRET || '';
 const userSchema = new mongoose.Schema(new UserSchema());
+
 userSchema.methods.generateAuthToken = function (): string {
     return jwt.sign(
         {

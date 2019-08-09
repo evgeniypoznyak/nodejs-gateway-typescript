@@ -65,5 +65,5 @@
 //  "include": [
 //    "/config"
 //  ],
-  "exclude": ["node_module", "./dist", "global.d.ts", "webpack.config.js", "./server.js", "./server.js.map"]
+  "exclude": ["node_module", "./dist", "global.d.ts", "webpack.config.js", "./server.js", "./server.js.map", "jest.config.js"]
 }

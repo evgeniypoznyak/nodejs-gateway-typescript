@@ -1,8 +1,7 @@
 import mongoose from 'mongoose';
-import config from 'config';
 import logger from '../middleware/logging';
-
-const url: string = process.env.MONGO_USERS || config.get('MONGO_USERS');
+// import 'dotenv/config';
+const url: string = process.env.MONGO_USERS || '';
 
 export default (): void => {
     mongoose.connect(url, {useNewUrlParser: true})

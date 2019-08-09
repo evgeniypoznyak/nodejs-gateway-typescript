@@ -1,12 +1,12 @@
 import express, {Request, Response} from 'express';
 import https from 'https';
 import axios from 'axios';
-import config from 'config';
 import auth from '../middleware/auth';
 import logger from '../middleware/logging';
 // eslint-disable-next-line new-cap
 const router = express.Router();
-const api: string = process.env.API_SKILLS || config.get('API_SKILLS');
+import 'dotenv/config';
+const api: string = process.env.API_SKILLS || '';
 
 router.get('/', async (req: Request, res: Response): Promise<any> => {
     const headers = req.headers;
