@@ -10,6 +10,7 @@ Icon
 server.js
 server.js.map
 dist
+api/swagger/swagger-example.yaml
 
 
 # Thumbnails

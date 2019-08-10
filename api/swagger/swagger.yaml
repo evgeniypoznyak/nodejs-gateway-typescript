@@ -1,16 +1,20 @@
 swagger: "2.0"
 info:
-  title: Node JS API Gateway Service
-  description: API description in Markdown.
+  title: API Gateway Service
+  description: Node JS, Typescript and JWT
   version: 1.0.0
-host: api.example.com
+host: api.evgeniy.poznyaks.com
+consumes:
+  - application/json
+produces:
+  - application/json
 schemes:
   - https
   - http
 paths:
-  /users:
+  /skills:
     get:
-      summary: Returns a list of users.
+      summary: Returns a list of skills.
       description: Optional extended description in Markdown.
       produces:
         - application/json
