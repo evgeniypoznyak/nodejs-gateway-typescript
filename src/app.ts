@@ -8,8 +8,13 @@ const app: Express = express();
 routes(app);
 db();
 config();
-process.on('unhandledRejection', ex => {
+
+process.on('unhandledRejection', (ex: any): any => {
+    console.log('unhandledRejection: ', ex);
     throw ex;
+});
+process.on('uncaughtException', (err: any): any => {
+    console.log('Caught exception: ', err);
 });
 
 const port: number | string = process.env.PORT || 2222;
