@@ -16,7 +16,7 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
     if (result && result.data && result.data.skills) {
         logger.log({
             level: 'info',
-            message: 'WOW: Getting results from microservice:',
+            message: 'Getting results from microservice: ',
             meta: JSON.stringify(result.data),
         });
         return res.send(result.data);
@@ -31,9 +31,48 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
 });
 
 router.post('/', auth, async (req, res): Promise<any> => {
+    logger.log({
+        level: 'info',
+        message: 'Processing post request...',
+    });
     const agent = new https.Agent({rejectUnauthorized: false});
-    const result = await axios.get(api, {httpsAgent: agent});
+    const result = await axios.post(api, req.body, {httpsAgent: agent});
+    logger.log({
+        level: 'info',
+        message: 'Data for post request was successfully saved: ',
+        meta: JSON.stringify(result.data),
+    });
     return res.send(result.data);
+});
+
+router.patch('/', auth, async (req, res): Promise<any> => {
+    const agent = new https.Agent({rejectUnauthorized: false});
+    logger.log({
+        level: 'info',
+        message: 'Processing patch request...',
+    });
+    const result = await axios.patch(api, req.body, {httpsAgent: agent});
+    logger.log({
+        level: 'info',
+        message: 'Data for patch request was successfully updated: ',
+        meta: JSON.stringify(result.data),
+    });
+    return res.send(result.data);
+});
+
+router.delete('/:id', auth, async (req, res): Promise<any> => {
+    const agent = new https.Agent({rejectUnauthorized: false});
+    logger.log({
+        level: 'info',
+        message: 'Processing delete request...',
+    });
+    const result = await axios.delete(api + req.params.id, {httpsAgent: agent});
+    logger.log({
+        level: 'info',
+        message: 'Data for delete request was successfully processed: ',
+        meta: JSON.stringify(result.data),
+    });
+    return res.sendStatus(result.data);
 });
 
 export default router;
