@@ -8,9 +8,9 @@
   "main": "server.js",
   "scripts": {
     "build-ts": "rm -rf dist & tsc",
-    "start-node-build": "node ./dist/app.js",
-    "watch-ts-and-run": "tsc -w & nodemon ./dist/app.js",
-    "ts-node": "ts-node ./src/app.ts",
+    "start-node-build": "node ./dist/server.js",
+    "watch-ts-and-run": "tsc -w & nodemon ./dist/server.js",
+    "ts-node": "ts-node ./src/server.ts",
     "test": "jest",
     "test-watch": "jest --watch"
   },

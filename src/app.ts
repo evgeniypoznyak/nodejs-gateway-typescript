@@ -1,17 +1,49 @@
-import 'express-async-errors';
-import express, {Express} from 'express';
-import routes from './startup/routes';
-import db from './startup/db';
-import config from './startup/config';
+import express, {Router} from 'express';
+import {RepositoryInterface} from './Repository/RepositoryInterface';
+import {Repository} from './Repository/Repository';
+import {MongoDbAdapter} from './Adapter/MongoDbAdapter/MongoDbAdapter';
+import {ControllerInterface} from './Controllers/ControllerInterface';
+import {Controller} from './Controllers/Controller';
+import error from './middleware/error';
 
-const app: Express = express();
-routes(app);
-db();
-config();
-process.on('unhandledRejection', ex => {
-    throw ex;
-});
+class App {
+    public app: express.Application;
+    public controllers: ControllerInterface[];
+    public repository: RepositoryInterface;
 
-const port: number | string = process.env.PORT || 2222;
-const host: string = process.env.HOST || 'http://localhost';
-app.listen(port, (): void => console.log(`Listening: ${host}:${port}`));
+    constructor(
+        controllers: ControllerInterface[],
+        repository: RepositoryInterface
+    ) {
+        this.repository = repository;
+        this.controllers = controllers;
+        this.app = express();
+        this.repository.connectToDatabase();
+        this.initializeMiddleware();
+        this.initializeErrorHandling();
+        this.initializeControllers(controllers);
+    }
+
+    private initializeMiddleware(): void {
+        this.app.use(express.json());
+    }
+
+    private initializeErrorHandling(): void {
+        this.app.use(error);
+    }
+
+    private initializeControllers(controllers: Controller[]) {
+        controllers.forEach((controller) => {
+            this.app.use('/', controller.router);
+        });
+    }
+}
+
+
+new App(
+    [
+        new Controller('', null),
+    ],
+    new Repository(new MongoDbAdapter())
+);
+
