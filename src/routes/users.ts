@@ -15,7 +15,6 @@ router.get('/me', auth, async (req: Request, res: Response): Promise<any> => {
 });
 
 router.post('/', async (req, res): Promise<any> => {
-    // @ts-ignore
     const {error} = validate(req.body);
     // @ts-ignore
     if (error) return res.status(400).send(error.details.slice().shift().message);

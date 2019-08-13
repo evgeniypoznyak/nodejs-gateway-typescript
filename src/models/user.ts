@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import Joi, {} from 'joi';
+import * as Joi from 'joi';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import config from 'config';
@@ -20,7 +20,7 @@ userSchema.methods.generateAuthToken = function (): string {
 
 const User: any = mongoose.model('Users', userSchema);
 
-const validateUser = (user: UserSchema): object => {
+const validateUser = (user: UserSchema): Joi.ValidationResult<object> => {
     const schema = {
         name: Joi.string().min(5).max(50).required(),
         email: Joi.string().min(5).max(255).required().email(),

@@ -4,12 +4,12 @@ import auth from '../routes/auth';
 import users from '../routes/users';
 import skills from '../routes/skills';
 import error from '../middleware/error';
+import cors from 'cors';
 
 export default (app: any): void => {
+    app.use(cors());
     app.use(express.json());
     app.use((req: Request, res: Response, next: NextFunction): void => {
-        res.header('Access-Control-Allow-Origin', '*');
-        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
         next();
     });
     app.use('/', home);

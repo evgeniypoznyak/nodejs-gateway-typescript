@@ -3,7 +3,7 @@ import express, {Request, Response, Router} from 'express';
 // eslint-disable-next-line new-cap
 const router: Router = express.Router();
 import {User} from '../models/user';
-import Joi, {} from 'joi';
+import * as Joi from 'joi';
 import bcrypt from 'bcrypt';
 
 const validate = async (req: Request): Promise<any> => {

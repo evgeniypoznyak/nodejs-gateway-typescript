@@ -10,11 +10,11 @@ db();
 config();
 
 process.on('unhandledRejection', (ex: any): any => {
-    console.log('unhandledRejection: ', ex);
+    console.log('unhandledRejection: ');
     throw ex;
 });
 process.on('uncaughtException', (err: any): any => {
-    console.log('Caught exception: ', err);
+    console.log('Caught exception: ');
 });
 
 const port: number | string = process.env.PORT || 2222;

@@ -1,8 +1,8 @@
 import {Request, Response} from 'express';
-
+import logger from './logging';
 // must be after all routes and middleware(s)
 export default (req: Request, res: Response): any => {
-    console.warn({
+    logger.warn({
         level: 'warn',
         message: 'Something failed',
         meta: {
