@@ -40,7 +40,11 @@ router.post('/', async (req: Request, res: Response): Promise<any> => {
 
     // @ts-ignore
     const token = user.generateAuthToken();
-    return res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
+    const payload = {
+        user: _.pick(user, ['_id', 'name', 'email']),
+        token,
+    };
+    return res.header('x-auth-token', token).send(payload);
 });
 
 export default router;
