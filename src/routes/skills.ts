@@ -46,12 +46,18 @@ router.post('/', auth, async (req, res): Promise<any> => {
 });
 
 router.patch('/', auth, async (req, res): Promise<any> => {
+    logger.log({level: 'info', message: 'testing', meta: JSON.stringify(req.headers)});
+    // return res.send(req.body);
     const agent = new https.Agent({rejectUnauthorized: false});
     logger.log({
         level: 'info',
         message: 'Processing patch request...',
+        meta: {
+            requestHeaders: req.headers,
+            requestBody: req.body,
+        },
     });
-    const result = await axios.patch(api, req.body, {httpsAgent: agent});
+    const result = await axios.patch(api, req.body.skill, {httpsAgent: agent});
     logger.log({
         level: 'info',
         message: 'Data for patch request was successfully updated: ',
