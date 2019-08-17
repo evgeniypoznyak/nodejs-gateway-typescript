@@ -74,7 +74,6 @@ router.delete('/:id', auth, async (req, res): Promise<any> => {
     });
     try {
         const result = await axios.delete(api + req.params.id, {httpsAgent: agent});
-        console.log(result);
         logger.log({
             level: 'info',
             message: 'Data for delete request was successfully processed: ',

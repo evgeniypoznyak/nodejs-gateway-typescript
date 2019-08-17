@@ -6,6 +6,7 @@ import {User} from '../models/user';
 import * as Joi from 'joi';
 import bcrypt from 'bcrypt';
 import logger from '../middleware/logging';
+import auth from '../middleware/auth';
 
 const validate = (body: object): Joi.ValidationResult<object> => {
     const schema = {
@@ -45,6 +46,10 @@ router.post('/', async (req: Request, res: Response): Promise<any> => {
         token,
     };
     return res.header('x-auth-token', token).send(payload);
+});
+
+router.post('/verify', auth, async (req, res): Promise<any> => {
+    res.send('OK');
 });
 
 export default router;
