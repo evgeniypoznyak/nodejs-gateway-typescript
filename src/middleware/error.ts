@@ -4,13 +4,13 @@ import logger from './logging';
 export default (req: Request, res: Response): any => {
     logger.warn({
         level: 'warn',
-        message: 'Something failed',
+        message: 'Error middleware: Something failed',
         meta: {
-            headers: req.headers,
-            body: req.body,
-            params: req.params,
-            cookies: req.cookies,
+            headers: JSON.stringify(req.headers),
+            body: JSON.stringify(req.body),
+            params: JSON.stringify(req.params),
+            cookies: JSON.stringify(req.cookies),
         },
     });
-    return res.status(500).send('Something failed');
+    return res.status(500).send('Error middleware: Something failed');
 };

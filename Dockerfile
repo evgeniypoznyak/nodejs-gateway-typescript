@@ -1,6 +1,8 @@
-# docker build -t evgeniy/node-gateway .
-# docker run -p 2222:80 -d --env-file ./.env --name evgeniy-node-gateway --network evgeniy_poznyaks_com evgeniy/node-gateway
+# docker build -t evgen1y/node-gateway .
+# docker run -p 2222:80 -d --env-file ./.env --name evgeniy-node-gateway --network evgeniy_poznyaks_com evgen1y/node-gateway
 #--env-file ./.env
+# e8c486d204f2
+# docker tag e8c486d204f2 evgen1y/node-gateway
 FROM node:10
 WORKDIR /usr/src/app
 COPY package*.json ./
