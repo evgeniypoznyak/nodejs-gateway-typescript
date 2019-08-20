@@ -16,8 +16,7 @@ router.get('/', async (req: Request, res: Response): Promise<any> => {
     if (result && result.data && result.data.skills) {
         logger.log({
             level: 'info',
-            message: 'Getting results from microservice: ',
-            meta: JSON.stringify(result.data),
+            message: `Getting results from microservice count: ${result.data.skills.length}`,
         });
         return res.send(result.data);
     }
@@ -45,9 +44,23 @@ router.post('/', auth, async (req, res): Promise<any> => {
     return res.send(result.data);
 });
 
+router.put('/', auth, async (req, res): Promise<any> => {
+    logger.log({
+        level: 'info',
+        message: 'Processing put request...',
+        meta: JSON.stringify(req.headers),
+    });
+    const agent = new https.Agent({rejectUnauthorized: false});
+    const result = await axios.put(api, req.body, {httpsAgent: agent});
+    logger.log({
+        level: 'info',
+        message: `Data for put request was successful items count: ${result.data.skills.length}`,
+    });
+    return res.send(result.data);
+});
+
 router.patch('/', auth, async (req, res): Promise<any> => {
     logger.log({level: 'info', message: 'testing', meta: JSON.stringify(req.headers)});
-    // return res.send(req.body);
     const agent = new https.Agent({rejectUnauthorized: false});
     logger.log({
         level: 'info',
@@ -65,6 +78,7 @@ router.patch('/', auth, async (req, res): Promise<any> => {
     });
     return res.send(result.data);
 });
+
 
 router.delete('/:id', auth, async (req, res): Promise<any> => {
     const agent = new https.Agent({rejectUnauthorized: false});

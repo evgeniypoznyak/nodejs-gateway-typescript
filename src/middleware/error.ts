@@ -7,7 +7,7 @@ export default (req: Request, res: Response): any => {
         message: 'Error middleware: Something failed',
         meta: {
             headers: JSON.stringify(req.headers),
-            body: JSON.stringify(req.body),
+            // body: JSON.stringify(req.body),
             params: JSON.stringify(req.params),
             cookies: JSON.stringify(req.cookies),
         },
