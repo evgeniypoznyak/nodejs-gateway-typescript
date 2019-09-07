@@ -35,17 +35,20 @@ router.post('/', async (req: Request, res: Response): Promise<any> => {
     }
 
     try {
+        let company = '';
+        if (req.body.company && req.body.company.length > 1) {
+            company = `<p>Company: ${req.body.company}</p>`;
+        }
         result = await transporter.sendMail({
             to: 'evgeniy.poznyak@gmail.com',
             from: req.body.email,
             subject: 'Email from evgeniy.poznyaks.com',
             html: `
-
-<p>${req.body.message},</p>
-<p>${req.body.name}</p>
-<p>${req.body.company}</p>
-<p>${req.body.email}</p>
-`,
+                    <p>${req.body.message}</p>
+                    <p>${req.body.name}</p>
+                    ${company}
+                    <p>${req.body.email}</p>
+                   `,
         });
         result.status = 'OK';
     } catch (e) {
