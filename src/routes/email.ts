@@ -1,21 +1,23 @@
 import express, {Request, Response} from 'express';
 import nodemailer from 'nodemailer';
 // @ts-ignore
-import sendGridTransport from 'nodemailer-sendgrid-transport';
 import config from 'config';
 import logger from '../middleware/logging';
 import {validateEmail} from '../models/ValidateEmail';
 import {EmailResult} from '../interfaces/EmailResult';
 
-const apiKey: string = process.env.API_KEY_EMAIL || config.get('API_KEY_EMAIL');
+const gmailUser: string = process.env.GMAIL_USERNAME || config.get('GMAIL_USERNAME');
+const gmailPassword: string = process.env.GMAIL_PASSWORD || config.get('GMAIL_PASSWORD');
 
-const transporter = nodemailer.createTransport(sendGridTransport(
-    {
-        auth: {
-            'api_key': apiKey,
-        },
-    }
-));
+const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        user: gmailUser,
+        pass: gmailPassword,
+    }});
 
 // eslint-disable-next-line new-cap
 const router = express.Router();

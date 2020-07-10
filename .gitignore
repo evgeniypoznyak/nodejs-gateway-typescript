@@ -11,6 +11,7 @@ server.js
 server.js.map
 dist
 api/swagger/swagger-example.yaml
+config/default.json
 
 
 # Thumbnails
