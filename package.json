@@ -17,7 +17,7 @@
   "dependencies": {
     "@types/nodemailer": "^6.2.1",
     "axios": "^0.19.0",
-    "bcrypt": "^3.0.4",
+    "bcrypt": "^5.0.0",
     "config": "^3.0.1",
     "debug": "~2.6.9",
     "express": "~4.16.0",

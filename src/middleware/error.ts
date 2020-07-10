@@ -1,11 +1,11 @@
 import {Request, Response} from 'express';
 import logger from './logging';
-// must be after all routes and middleware(s)
 export default (req: Request, res: Response): any => {
     logger.warn({
         level: 'warn',
         message: 'Error middleware: Something failed',
         meta: {
+            url: req.url,
             headers: JSON.stringify(req.headers),
             // body: JSON.stringify(req.body),
             params: JSON.stringify(req.params),
