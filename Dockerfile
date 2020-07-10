@@ -1,5 +1,5 @@
 # docker build -t evgen1y/node-gateway .
-# docker tag 03aea223c8c6 evgen1y/node-gateway
+# docker tag 8a6d980ad163 evgen1y/node-gateway
 # docker push evgen1y/node-gateway
 # docker run -p 2222:80 -d --env-file ./.env --name evgeniy-node-gateway --network evgeniy_poznyaks_com evgen1y/node-gateway
 #--env-file ./.env

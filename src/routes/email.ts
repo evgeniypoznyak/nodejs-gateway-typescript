@@ -12,7 +12,7 @@ const gmailPassword: string = process.env.GMAIL_PASSWORD || config.get('GMAIL_PA
 const transporter = nodemailer.createTransport({
     service: 'gmail',
     host: 'smtp.gmail.com',
-    port: 465,
+    port: 587,
     secure: true,
     auth: {
         user: gmailUser,
